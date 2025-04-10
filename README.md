@@ -10,6 +10,9 @@ Hummingbot is an open-source framework that helps you design and deploy automate
 
 The Hummingbot codebase is free and publicly available under the Apache 2.0 open-source license. Our mission is to **democratize high-frequency trading** by creating a global community of algorithmic traders and developers that share knowledge and contribute to the codebase.
 
+> [!IMPORTANT] 
+> This README is for the official **Hummingbot** project. For the **Today In DeFi** fork, please refer to the [Today_In_DeFi_Fork_README.md](./Today_In_DeFi_Fork_README.md).
+
 ## Quick Links
 
 * [Website and Docs](https://hummingbot.org): Official Hummingbot website and documentation
