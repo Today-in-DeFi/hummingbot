@@ -1,0 +1,26 @@
+@startuml funding_rate_arbitrage_sequence
+
+actor User
+
+User -> FundingRateArbitrage: start(clock, timestamp)
+activate FundingRateArbitrage
+FundingRateArbitrage -> FundingRateArbitrage: apply_initial_setting()
+FundingRateArbitrage -> ConnectorBase: set_position_mode()
+FundingRateArbitrage -> ConnectorBase: set_leverage()
+deactivate FundingRateArbitrage
+
+User -> FundingRateArbitrage: create_actions_proposal()
+activate FundingRateArbitrage
+FundingRateArbitrage -> FundingRateArbitrage: get_funding_info_by_token(token)
+FundingRateArbitrage -> FundingRateArbitrage: get_most_profitable_combination(funding_info_report)
+FundingRateArbitrage -> FundingRateArbitrage: get_current_profitability_after_fees(token, connector_1, connector_2, trade_side)
+FundingRateArbitrage -> FundingRateArbitrage: get_position_executors_config(token, connector_1, connector_2, trade_side)
+deactivate FundingRateArbitrage
+
+User -> FundingRateArbitrage: stop_actions_proposal()
+activate FundingRateArbitrage
+FundingRateArbitrage -> FundingRateArbitrage: get_funding_info_by_token(token)
+FundingRateArbitrage -> FundingRateArbitrage: get_normalized_funding_rate_in_seconds(funding_info_report, connector_name)
+deactivate FundingRateArbitrage
+
+@enduml
