@@ -1,0 +1,43 @@
+@startuml funding_rate_arbitrage
+
+class FundingRateArbitrageConfig {
+    - script_file_name: str
+    - candles_config: List[CandlesConfig]
+    - controllers_config: List[str]
+    - markets: Dict[str, Set[str]]
+    - leverage: int
+    - min_funding_rate_profitability: Decimal
+    - connectors: Set[str]
+    - tokens: Set[str]
+    - position_size_quote: Decimal
+    - profitability_to_take_profit: Decimal
+    - funding_rate_diff_stop_loss: Decimal
+    - trade_profitability_condition_to_enter: bool
+    - fee_mode: str
+    + validate_sets(cls, v)
+}
+
+class FundingRateArbitrage {
+    - quote_markets_map: Dict[str, str]
+    - funding_payment_interval_map: Dict[str, int]
+    - funding_profitability_interval: int
+    - ready_to_trade: bool
+    + get_trading_pair_for_connector(cls, token, connector)
+    + init_markets(cls, config: FundingRateArbitrageConfig)
+    + __init__(self, connectors: Dict[str, ConnectorBase], config: FundingRateArbitrageConfig)
+    + start(self, clock: Clock, timestamp: float) -> None
+    + apply_initial_setting(self)
+    + get_funding_info_by_token(self, token)
+    + get_current_profitability_after_fees(self, token: str, connector_1: str, connector_2: str, side: TradeType)
+    + get_most_profitable_combination(self, funding_info_report: Dict)
+    + get_normalized_funding_rate_in_seconds(self, funding_info_report, connector_name)
+    + create_actions_proposal(self) -> List[CreateExecutorAction]
+    + stop_actions_proposal(self) -> List[StopExecutorAction]
+    + did_complete_funding_payment(self, funding_payment_completed_event: FundingPaymentCompletedEvent)
+    + get_position_executors_config(self, token, connector_1, connector_2, trade_side)
+    + format_status(self) -> str
+}
+
+FundingRateArbitrageConfig <|-- FundingRateArbitrage
+
+@enduml
