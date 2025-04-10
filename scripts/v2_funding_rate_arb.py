@@ -76,6 +76,11 @@ class FundingRateArbitrageConfig(StrategyV2ConfigBase):
             prompt=lambda mi: "Create the position if the trade profitability is positive only: ",
             prompt_on_new=True
         ))
+    fee_mode: str = Field(
+        default="taker",
+        client_data=ClientFieldData(
+            prompt=lambda mi: "Enter the fee mode (taker/maker/mixed): ",
+            prompt_on_new=True))
 
     @validator("connectors", "tokens", pre=True, allow_reuse=True, always=True)
     def validate_sets(cls, v):
@@ -170,6 +175,18 @@ class FundingRateArbitrage(StrategyV2Base):
                 quote_volume=self.config.position_size_quote,
                 is_buy=side != TradeType.BUY,
             ).result_price)
+
+            # Determine the fee mode and calculate fees accordingly
+            if self.config.fee_mode == "taker":
+                is_maker_1 = False
+                is_maker_2 = False
+            elif self.config.fee_mode == "maker":
+                is_maker_1 = True
+                is_maker_2 = True
+            else:  # mixed
+                is_maker_1 = False
+                is_maker_2 = True
+
             estimated_fees_connector_1 = self.connectors[connector_1].get_fee(
                 base_currency=trading_pair_1.split("-")[0],
                 quote_currency=trading_pair_1.split("-")[1],
@@ -177,7 +194,7 @@ class FundingRateArbitrage(StrategyV2Base):
                 order_side=TradeType.BUY,
                 amount=self.config.position_size_quote / connector_1_price,
                 price=connector_1_price,
-                is_maker=False,
+                is_maker=is_maker_1,
                 position_action=PositionAction.OPEN
             ).percent
             estimated_fees_connector_2 = self.connectors[connector_2].get_fee(
@@ -187,7 +204,7 @@ class FundingRateArbitrage(StrategyV2Base):
                 order_side=TradeType.BUY,
                 amount=self.config.position_size_quote / connector_2_price,
                 price=connector_2_price,
-                is_maker=False,
+                is_maker=is_maker_2,
                 position_action=PositionAction.OPEN
             ).percent
 
