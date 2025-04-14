@@ -8,6 +8,9 @@
 .PHONY: uninstall
 .PHONY: clean
 .PHONY: build
+.PHONY: up
+.PHONY: down
+.PHONY: logs
 
 test:
 	coverage run -m pytest \
@@ -44,3 +47,12 @@ uninstall:
 
 build:
 	./compile
+
+up:
+	docker compose up -d
+
+down:
+	docker compose down
+
+logs:
+	docker compose logs -f
