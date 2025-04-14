@@ -11,6 +11,7 @@
 .PHONY: up
 .PHONY: down
 .PHONY: logs
+.PHONY: cli
 
 test:
 	coverage run -m pytest \
@@ -56,3 +57,6 @@ down:
 
 logs:
 	docker compose logs -f
+
+cli:
+	docker attach hummingbot
