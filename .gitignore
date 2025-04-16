@@ -82,7 +82,7 @@ coverage.xml
 *.srl
 *.key
 *.crt
-*.log
+logs/
 
 # Debug console
 .debug_console_ssh_host_key
