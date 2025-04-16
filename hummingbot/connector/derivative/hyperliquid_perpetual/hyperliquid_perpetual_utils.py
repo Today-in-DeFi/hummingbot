@@ -20,6 +20,18 @@ EXAMPLE_PAIR = "BTC-USD"
 
 BROKER_ID = "HBOT"
 
+def trading_pair_to_exchange_symbol(trading_pair: str, domain: str = None) -> str:
+    """
+    Convert trading pair to the actual symbol used by Hyperliquid.
+    Only in testnet, convert BASE-USDT to BASEUSD.
+    """
+    if domain == "hyperliquid_perpetual_testnet":
+        # Only process pairs ending with "-USDT"
+        if trading_pair.endswith("-USDT"):
+            base = trading_pair[:-5]  # Remove -USDT
+            return f"{base}USD"
+    return trading_pair
+
 
 def validate_bool(value: str) -> Optional[str]:
     """
