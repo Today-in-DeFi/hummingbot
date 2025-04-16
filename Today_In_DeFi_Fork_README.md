@@ -11,6 +11,7 @@
 - 回傳結果只考慮單一組合，限制策略多樣性
 - 缺乏錯誤處理與資料驗證，難以偵錯或自我保護
 - 程式結構不易擴充，不利於內部模組或邏輯重用
+- 缺乏自動休息與重連（timer/reconnect）機制，易導致 clock tick error
 
 透過這個開發計畫，我們希望提升策略的**可靠性、彈性與真實可用性**，並為後續開發更進階的 DeFi 策略（如多市場多幣種資金費率套利、期現套利等）奠定穩固基礎。
 
@@ -43,6 +44,13 @@ By executing this roadmap, we aim to improve the **reliability, adaptability, an
 | 優先級 | 任務 | 說明 |
 |--------|------|------|
 | 🟡 High | **交易費用設定選項化** | ✅ 已完成：加入 `fee_mode` 設定，支援 taker/maker/mixed 模式。 |
+
+---
+
+### 🟢 第三階段（進行中/待辦）
+| 優先級 | 任務 | 說明 |
+|--------|------|------|
+| 🟢 High | **自動休息與重連（timer/reconnect）機制** | 在 `scripts/v2_funding_rate_arb.py` 策略腳本中，加入定時自動斷線與重連 Hyperliquid API 的邏輯，以預防 clock tick error，提升長時間運行的穩定性。 |
 | 🟡 High | **補上 `self.ready_to_trade = True`** | ✅ 已完成：加入 `start()` 確保狀態顯示正常。 |
 | 🟡 Medium | **將 `get_most_profitable_combination()` 回傳改為清單** | ✅ 已完成：使用排序回傳多個組合，提升策略靈活性。 |
 
@@ -67,3 +75,7 @@ By executing this roadmap, we aim to improve the **reliability, adaptability, an
 | ⚪ Low | **使用者設定值驗證機制** | 為所有 config 欄位加入範圍與合法值檢查，提高使用安全性。 |
 | ⚪ Low | **部位大小動態調整** | 根據市場流動性或波動度自動調整單次下單數量，減少風險。 |
 | ⚪ Low | **缺乏長期部位再平衡機制** | 若市場價格偏離原始開倉價太多，可考慮重新調整兩邊倉位。 |
+
+## 參考
+
+[`DOCKER_USAGE.md`](DOCKER_USAGE.md)：本專案開發、測試、部署與維運 Hummingbot 策略的最佳實踐與常用指令說明，包含如何善用官方映像檔、掛載 `scripts/` 目錄、正確進入/離開 CLI 及其他常用 Docker 指令。
