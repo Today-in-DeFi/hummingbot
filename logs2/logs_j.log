@@ -1,0 +1,277 @@
+2025-04-16 07:15:46,238 - 16 - hummingbot.client.hummingbot_application - INFO - Creating the clock with tick size: 1.0
+2025-04-16 07:15:46,243 - 16 - hummingbot.client.hummingbot_application - INFO - start command initiated.
+2025-04-16 07:15:46,397 - 16 - hummingbot.connector.derivative.hyperliquid_perpetual.hyperliquid_perpetual_derivative.HyperliquidPerpetualDerivative - INFO - Network status has changed to NetworkStatus.CONNECTED. Starting networking...
+2025-04-16 07:15:46,508 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_derivative.BinancePerpetualDerivative - INFO - Network status has changed to NetworkStatus.CONNECTED. Starting networking...
+2025-04-16 07:15:46,575 - 16 - hummingbot.connector.derivative.hyperliquid_perpetual.hyperliquid_perpetual_user_stream_data_source.HyperliquidPerpetualUserStreamDataSource - INFO - Subscribed to private order and trades changes channels...
+2025-04-16 07:15:46,617 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_user_stream_data_source.BinancePerpetualUserStreamDataSource - INFO - Successfully obtained listen key YsUY7AVObyqb6xzKfLp5nXcdW17kIwsuny67ZlfUbm43IXCS14Mxrw9L7ZQvouUZ
+2025-04-16 07:15:46,826 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:46,958 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:47,000 - 16 - hummingbot.strategy.script_strategy_base - WARNING - binance_perpetual is not ready. Please wait...
+2025-04-16 07:15:47,001 - 16 - hummingbot.strategy.script_strategy_base - WARNING - hyperliquid_perpetual_testnet is not ready. Please wait...
+2025-04-16 07:15:47,837 - 16 - hummingbot.core.rate_oracle.rate_oracle - INFO - Network status has changed to NetworkStatus.CONNECTED. Starting networking...
+2025-04-16 07:15:48,248 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:48,426 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:49,002 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:49,713 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:49,888 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:50,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:51,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:51,177 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:51,355 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:52,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:52,645 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:52,836 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:53,000 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:54,002 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:54,127 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:54,302 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:55,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:55,590 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:55,784 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:56,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:57,000 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:57,112 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:57,283 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:58,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:15:58,571 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:15:58,743 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:15:59,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:16:00,001 - 16 - hummingbot.core.clock - ERROR - Unexpected error running clock tick.
+Traceback (most recent call last):
+  File "hummingbot/core/clock.pyx", line 119, in hummingbot.core.clock.Clock.run_til
+    child_iterator.c_tick(self._current_tick)
+  File "hummingbot/strategy/strategy_py_base.pyx", line 44, in hummingbot.strategy.strategy_py_base.StrategyPyBase.c_tick
+    self.tick(timestamp)
+  File "/home/hummingbot/hummingbot/strategy/script_strategy_base.py", line 75, in tick
+    self.on_tick()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 297, in on_tick
+    executor_actions: List[ExecutorAction] = self.determine_executor_actions()
+  File "/home/hummingbot/hummingbot/strategy/strategy_v2_base.py", line 306, in determine_executor_actions
+    actions.extend(self.create_actions_proposal())
+TypeError: 'coroutine' object is not iterable
+2025-04-16 07:16:00,051 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:16:00,223 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:16:00,933 - 16 - hummingbot.client.hummingbot_application - INFO - stop command initiated.
+2025-04-16 07:16:01,505 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
+2025-04-16 07:16:01,620 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - ERROR - Unexpected error occurred when listening to order book streams. Retrying in 5 seconds...
+Traceback (most recent call last):
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 80, in listen_for_subscriptions
+    await self._process_websocket_messages(websocket_assistant=ws)
+  File "/home/hummingbot/hummingbot/core/data_type/order_book_tracker_data_source.py", line 236, in _process_websocket_messages
+    channel: str = self._channel_originating_message(event_message=data)
+  File "/home/hummingbot/hummingbot/connector/derivative/binance_perpetual/binance_perpetual_api_order_book_data_source.py", line 128, in _channel_originating_message
+    if "@depth" in stream_name:
+TypeError: argument of type 'NoneType' is not iterable
+2025-04-16 07:16:02,899 - 16 - hummingbot.connector.derivative.binance_perpetual.binance_perpetual_api_order_book_data_source.BinancePerpetualAPIOrderBookDataSource - INFO - Subscribed to public order book, trade and funding info channels...
