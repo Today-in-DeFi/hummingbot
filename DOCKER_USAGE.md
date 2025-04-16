@@ -3,6 +3,10 @@
 ## 1. Introduction
 This guide provides instructions for developers and analysts on how to run and manage the Hummingbot container using Docker. It includes a Makefile for automating common tasks.
 
+> [!IMPORTANT]
+> Working directory on our DigitalOcean droplet:
+> `/home/jacques/hummingbot-tid`
+
 ## 2. Prerequisites
 - Ensure Docker and Docker Compose are installed on your system.
 - Familiarize yourself with basic Docker commands.
@@ -52,6 +56,9 @@ This guide provides instructions for developers and analysts on how to run and m
 
 ## 4. Docker Commands
 
+> [!NOTE]
+> Make sure that you're at `/home/jacques/hummingbot-tid`.
+
 ### 4.1 Running the Container
 To start the container in detached mode, run:
 ```bash
@@ -78,34 +85,25 @@ docker ps
 ### 4.4 Interactive Access
 To access the container interactively, you have two options:
 
-- **Attach to the Hummingbot CLI interface:**
-  ```bash
-  docker attach hummingbot
-  # or
-  make cli
-  ```
-  This will attach your terminal directly to the Hummingbot CLI running inside the container.
-  
-  > [!IMPORTANT]
-  > If you type `exit` or `quit` in the Hummingbot CLI, it will stop the Hummingbot process and the Docker container will also stop. To leave the CLI without stopping the container, press `Ctrl-p` then `Ctrl-q` to detach safely.
-  
-- **Open a Bash shell inside the container:**
-  ```bash
-  docker exec -it hummingbot /bin/bash
-  ```
-  This gives you a shell prompt for advanced debugging or file operations.
-
-### 4.5 Viewing Logs
-To view the logs of the running container, execute:
+#### 4.4.1 Attach to the Hummingbot CLI interface
 ```bash
-docker compose logs -f
+docker attach hummingbot
+# or
+make cli
 ```
-or simply
-```bash
-make logs
-```
+This will attach your terminal directly to the Hummingbot CLI running inside the container.
 
-### 4.6 Restarting the Container
+> [!IMPORTANT]
+> If you type `exit` or `quit` in the Hummingbot CLI, it will stop the Hummingbot process and the Docker container will also stop. To leave the CLI without stopping the container, press `Ctrl-p` then `Ctrl-q` to detach safely.
+
+#### 4.4.2 Open a Bash shell inside the container
+```bash
+docker exec -it hummingbot /bin/bash
+```
+This gives you a shell prompt for advanced debugging or file operations.
+
+
+### 4.5 Restarting the Container
 To restart the container, use:
 ```bash
 docker compose restart
@@ -115,7 +113,7 @@ docker compose restart
 
 
 
-### 4.7 Building the Image
+### 4.6 Building the Image
 To build the image, one may use:
 ```bash
 make build
@@ -138,14 +136,14 @@ Below is the Makefile to automate the above tasks:
 .PHONY: up down logs cli
 
 up:
-	docker compose up -d
+    docker compose up -d
 
 down:
-	docker compose down
+    docker compose down
 
 logs:
-	docker compose logs -f
+    docker compose logs -f
 
 cli:
-	docker attach hummingbot
+    docker attach hummingbot
 ```
