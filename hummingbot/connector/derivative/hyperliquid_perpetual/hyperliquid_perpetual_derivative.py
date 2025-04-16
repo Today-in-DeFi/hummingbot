@@ -60,6 +60,10 @@ class HyperliquidPerpetualDerivative(PerpetualDerivativePyBase):
         self._trading_required = trading_required
         self._trading_pairs = trading_pairs
         self._domain = domain
+
+    def to_exchange_symbol(self, trading_pair: str) -> str:
+        from .hyperliquid_perpetual_utils import trading_pair_to_exchange_symbol
+        return trading_pair_to_exchange_symbol(trading_pair, self._domain)
         self._position_mode = None
         self._last_trade_history_timestamp = None
         self.coin_to_asset: Dict[str, int] = {}
@@ -253,7 +257,7 @@ class HyperliquidPerpetualDerivative(PerpetualDerivativePyBase):
         pass
 
     async def _place_cancel(self, order_id: str, tracked_order: InFlightOrder):
-        symbol = await self.exchange_symbol_associated_to_pair(trading_pair=tracked_order.trading_pair)
+        symbol = self.to_exchange_symbol(tracked_order.trading_pair)
         coin = symbol.split("-")[0]
 
         api_params = {
@@ -313,7 +317,7 @@ class HyperliquidPerpetualDerivative(PerpetualDerivativePyBase):
         safe_ensure_future(self._create_order(
             trade_type=TradeType.BUY,
             order_id=hex_order_id,
-            trading_pair=trading_pair,
+            trading_pair=self.to_exchange_symbol(trading_pair),
             amount=amount,
             order_type=order_type,
             price=price,
@@ -352,7 +356,7 @@ class HyperliquidPerpetualDerivative(PerpetualDerivativePyBase):
         safe_ensure_future(self._create_order(
             trade_type=TradeType.SELL,
             order_id=hex_order_id,
-            trading_pair=trading_pair,
+            trading_pair=self.to_exchange_symbol(trading_pair),
             amount=amount,
             order_type=order_type,
             price=price,

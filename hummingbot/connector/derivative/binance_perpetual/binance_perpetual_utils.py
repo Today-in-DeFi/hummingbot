@@ -15,6 +15,18 @@ CENTRALIZED = True
 
 EXAMPLE_PAIR = "BTC-USDT"
 
+def trading_pair_to_exchange_symbol(trading_pair: str, domain: str = None) -> str:
+    """
+    Convert trading pair to the actual symbol used by Binance Perpetual.
+    Only in testnet, convert BASE-USDT to BASEUSDT.
+    """
+    if domain == "binance_perpetual_testnet":
+        # Only convert pairs ending with "-USDT"
+        if trading_pair.endswith("-USDT"):
+            base = trading_pair[:-5]  # Remove -USDT
+            return f"{base}USDT"
+    return trading_pair
+
 BROKER_ID = "x-3QreWesy"
 
 

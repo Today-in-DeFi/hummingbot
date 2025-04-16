@@ -58,6 +58,10 @@ class BinancePerpetualDerivative(PerpetualDerivativePyBase):
         self._trading_required = trading_required
         self._trading_pairs = trading_pairs
         self._domain = domain
+
+    def to_exchange_symbol(self, trading_pair: str) -> str:
+        from .binance_perpetual_utils import trading_pair_to_exchange_symbol
+        return trading_pair_to_exchange_symbol(trading_pair, self._domain)
         self._position_mode = None
         self._last_trade_history_timestamp = None
         super().__init__(client_config_map)

@@ -44,16 +44,16 @@ class HyperliquidPerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource
     async def get_last_traded_prices(self,
                                      trading_pairs: List[str],
                                      domain: Optional[str] = None) -> Dict[str, float]:
-        return await self._connector.get_last_traded_prices(trading_pairs=trading_pairs)
+        return await self._connector.get_last_traded_prices(trading_pairs=[self._connector.to_exchange_symbol(tp) for tp in trading_pairs])
 
     async def get_funding_info(self, trading_pair: str) -> FundingInfo:
         response: List = await self._request_complete_funding_info(trading_pair)
-        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=trading_pair)
+        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=self._connector.to_exchange_symbol(trading_pair))
         coin = ex_trading_pair.split("-")[0]
         for index, i in enumerate(response[0]['universe']):
             if i['name'] == coin:
                 funding_info = FundingInfo(
-                    trading_pair=trading_pair,
+                    trading_pair=self._connector.to_exchange_symbol(trading_pair),
                     index_price=Decimal(response[1][index]['oraclePx']),
                     mark_price=Decimal(response[1][index]['markPx']),
                     next_funding_utc_timestamp=self._next_funding_time(),
@@ -70,7 +70,7 @@ class HyperliquidPerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource
                 for trading_pair in self._trading_pairs:
                     funding_info = await self.get_funding_info(trading_pair)
                     funding_info_update = FundingInfoUpdate(
-                        trading_pair=trading_pair,
+                        trading_pair=self._connector.to_exchange_symbol(trading_pair),
                         index_price=funding_info.index_price,
                         mark_price=funding_info.mark_price,
                         next_funding_utc_timestamp=funding_info.next_funding_utc_timestamp,
@@ -85,7 +85,7 @@ class HyperliquidPerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource
                 await self._sleep(CONSTANTS.FUNDING_RATE_UPDATE_INTERNAL_SECOND)
 
     async def _request_order_book_snapshot(self, trading_pair: str) -> Dict[str, Any]:
-        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=trading_pair)
+        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=self._connector.to_exchange_symbol(trading_pair))
         coin = ex_trading_pair.split("-")[0]
         params = {
             "type": 'l2Book',
@@ -122,7 +122,7 @@ class HyperliquidPerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource
         """
         try:
             for trading_pair in self._trading_pairs:
-                symbol = await self._connector.exchange_symbol_associated_to_pair(trading_pair=trading_pair)
+                symbol = await self._connector.exchange_symbol_associated_to_pair(trading_pair=self._connector.to_exchange_symbol(trading_pair))
                 coin = symbol.split("-")[0]
                 trades_payload = {
                     "method": "subscribe",

@@ -47,12 +47,12 @@ class BinancePerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource):
     async def get_last_traded_prices(self,
                                      trading_pairs: List[str],
                                      domain: Optional[str] = None) -> Dict[str, float]:
-        return await self._connector.get_last_traded_prices(trading_pairs=trading_pairs)
+        return await self._connector.get_last_traded_prices(trading_pairs=[self._connector.to_exchange_symbol(tp) for tp in trading_pairs])
 
     async def get_funding_info(self, trading_pair: str) -> FundingInfo:
         symbol_info: Dict[str, Any] = await self._request_complete_funding_info(trading_pair)
         funding_info = FundingInfo(
-            trading_pair=trading_pair,
+            trading_pair=self._connector.to_exchange_symbol(trading_pair),
             index_price=Decimal(symbol_info["indexPrice"]),
             mark_price=Decimal(symbol_info["markPrice"]),
             next_funding_utc_timestamp=int(float(symbol_info["nextFundingTime"]) * 1e-3),
@@ -61,7 +61,7 @@ class BinancePerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource):
         return funding_info
 
     async def _request_order_book_snapshot(self, trading_pair: str) -> Dict[str, Any]:
-        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=trading_pair)
+        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=self._connector.to_exchange_symbol(trading_pair))
 
         params = {
             "symbol": ex_trading_pair,
@@ -105,7 +105,7 @@ class BinancePerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource):
             for stream_id, channel in stream_id_channel_pairs:
                 params = []
                 for trading_pair in self._trading_pairs:
-                    symbol = await self._connector.exchange_symbol_associated_to_pair(trading_pair=trading_pair)
+                    symbol = await self._connector.exchange_symbol_associated_to_pair(trading_pair=self._connector.to_exchange_symbol(trading_pair))
                     params.append(f"{symbol.lower()}{channel}")
                 payload = {
                     "method": "SUBSCRIBE",
@@ -186,7 +186,7 @@ class BinancePerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource):
         if trading_pair not in self._trading_pairs:
             return
         funding_info = FundingInfoUpdate(
-            trading_pair=trading_pair,
+            trading_pair=self._connector.to_exchange_symbol(trading_pair),
             index_price=Decimal(data["i"]),
             mark_price=Decimal(data["p"]),
             next_funding_utc_timestamp=int(float(data["T"]) * 1e-3),
@@ -196,7 +196,7 @@ class BinancePerpetualAPIOrderBookDataSource(PerpetualAPIOrderBookDataSource):
         message_queue.put_nowait(funding_info)
 
     async def _request_complete_funding_info(self, trading_pair: str):
-        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=trading_pair)
+        ex_trading_pair = await self._connector.exchange_symbol_associated_to_pair(trading_pair=self._connector.to_exchange_symbol(trading_pair))
         data = await self._connector._api_get(
             path_url=CONSTANTS.MARK_PRICE_URL,
             params={"symbol": ex_trading_pair},
